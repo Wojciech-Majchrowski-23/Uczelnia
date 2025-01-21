@@ -1,0 +1,7 @@
+- Obiekt obserwowany (subject) - Student
+- Obserwator obserwuje studenta, a konkretnie jego oceny, czy przypadkiem nie jest zagrożony
+- Jeśli jest, to wyświetl komunikat (później w GUI) i zmienić składową czy_zagrożony na true.
+- stwórz interfejs subject i daj że student go implementuje
+- Stwórz studenta, zrób mu wszystkie dobre oceny, po czym za pomocą setOcenyStudenta(Osoby) ustaw jednemu ze studentów ocenę 2.0. 
+- utwórz składową czy_zagrożony w polach studenta
+- jeśli obserwator zauważy, że uczeń jest zagrożony, to niech przełączy czy_zagrożony na true oraz niech doda ucznia na listę zagrożonych uczniów

@@ -1,0 +1,3 @@
+284336;Wojciech;Majchrowski;IST;PRZEDMIOTY;Fizyka;ocena;5.0;Analiza;ocena;5.0
+284255;Kacper;Kotleszka;Niderlantystyka;PRZEDMIOTY;Grmatyka;ocena;4.0;Fonetyka;ocena;-4.5
+284336;Lena;Belan;Lekarski;PRZEDMIOTY;Anatomia;ocena;3.5;Algebra;ocena;4.5
