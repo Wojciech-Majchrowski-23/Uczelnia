@@ -6,19 +6,21 @@ import java.io.Serializable;
 
 public class ZagrozenieSetter implements Serializable, Observer {
 
-    private double ocena;
+    private Subject subject;
+    private Przedmiot przedmiot;
 
-    private Subject przedmiot;
-
-    public ZagrozenieSetter(Subject przedmiot) {
+    public ZagrozenieSetter(Subject subject, Przedmiot przedmiot) {
+        this.subject = przedmiot;
+        this.subject.registerObserver(this);
         this.przedmiot = przedmiot;
-        this.przedmiot.registerObserver(this);
     }
 
-    public boolean update(Przedmiot p) {
-        if(p.getOcena()<3.0){
-            return true;
+    public void update(Przedmiot przedmiot) {
+        setZagro();
+    }
+    private void setZagro() {
+        if(przedmiot.getOcena() < 3.0){
+            przedmiot.setCzyZagrozenie(true);
         }
-        return false;
     }
 }

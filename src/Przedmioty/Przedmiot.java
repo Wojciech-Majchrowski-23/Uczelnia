@@ -20,7 +20,7 @@ public class Przedmiot implements Serializable, Subject {
         this.ECTS = ECTS;
         this.liczbaGodzin = liczbaGodzin;
         this.ocena = ocena;
-        ZagrozenieSetter zagrozenieSetter = new ZagrozenieSetter(this);
+        ZagrozenieSetter zagrozenieSetter = new ZagrozenieSetter(this, this);
     }
 
     //--------------SubjectMethods-----------------
@@ -30,7 +30,7 @@ public class Przedmiot implements Serializable, Subject {
     public void removeObserver(Observer observer){};
     public void notifyObservers(){
         for(Observer observer : ObserverList) {
-            this.czyZagrozenie = observer.update(this);
+            observer.update(this);
         }
     };
     //---------------------------------------------
@@ -46,6 +46,9 @@ public class Przedmiot implements Serializable, Subject {
     }
     public double getOcena() {return ocena;}
     public boolean isCzyZagrozenie() {return czyZagrozenie;}
+    public void setCzyZagrozenie(boolean czyZagrozenie) {
+        this.czyZagrozenie = czyZagrozenie;
+    }
 
     public void setOcena(double ocena) {
         this.ocena = ocena;

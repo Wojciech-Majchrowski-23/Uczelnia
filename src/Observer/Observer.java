@@ -4,6 +4,6 @@ import Przedmioty.Przedmiot;
 
 public interface Observer {
 
-    boolean update(Przedmiot p);
+    void update(Przedmiot p);
 
 }
