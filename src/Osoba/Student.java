@@ -3,8 +3,10 @@ package Osoba;
 import Przedmioty.Przedmiot;
 
 import java.util.ArrayList;
+import java.util.Observer;
+import Observer.Subject;
 
-public class Student extends Osoba{
+public class Student extends Osoba {
 
     private String kierunek;
     private int semestr;
@@ -24,15 +26,15 @@ public class Student extends Osoba{
     public void info(){
         System.out.println("Student");
         super.info();
-        System.out.println(kierunek + " " + semestr + " semestr" + semestr + " id: " + id);
+        System.out.println(kierunek + " " + semestr + " semestr " + semestr + " id: " + id);
 
         if(!przedmioty.isEmpty()){
             System.out.println("Przedmioty Studenta: ");
             for(Przedmiot p : przedmioty){
-                System.out.println(p.getNazwa() + ", liczba ECTS: " + p.getECTS() + ", liczba godzin: " + p.getLiczbaGodzin() + ", ocena: " + p.getOcena());
+                System.out.println(p.getNazwa() + ", liczba ECTS: " + p.getECTS() + ", liczba godzin: "
+                        + p.getLiczbaGodzin() + ", ocena: " + p.getOcena()+ ", zagrozenie: " +p.isCzyZagrozenie());
             }
         }
-
     }
 
     public void przywitanie(){
@@ -54,11 +56,9 @@ public class Student extends Osoba{
     }
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}
-
     public ArrayList<Przedmiot> getPrzedmioty() {
         return przedmioty;
     }
-
     public void addPrzedmiot(Przedmiot przedmiot) {
         przedmioty.add(przedmiot);
     }

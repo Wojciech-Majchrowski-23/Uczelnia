@@ -10,6 +10,7 @@ import Przedmioty.Przedmiot;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class UczelniaHandler {
@@ -28,6 +29,13 @@ public class UczelniaHandler {
                 ((PracAdmin)czlowiek).info();
                 System.out.println();
             }
+        }
+    }
+    public static void printInfoforStudents(ArrayList<Student> studenci){
+        for(int i=0; i<studenci.size(); i++) {
+            System.out.println("[" + i + "]");
+            studenci.get(i).info();
+            System.out.println();
         }
     }
     public static void searchByLastname(ArrayList<Osoba> ludzie, String nazwisko){
@@ -71,10 +79,16 @@ public class UczelniaHandler {
             }
         }
     }
+    public static double setRandomOcena() {
+        Random random = new Random();
+        double[] possibleValues = {3.0, 3.5, 4.0, 4.5, 5.0, 5.5};
+        int randomIndex = random.nextInt(possibleValues.length);
+        return possibleValues[randomIndex];
+    }
     public static void setPrzedmiotyManually(Student student){
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Ile przedmiotow chcesz dodac studentowi? Ilosc: ");
+        System.out.print("Ile przedmiotow chcesz dodac studentowi " + student.getImie() + " " + student.getNazwisko() + ". Ilosc: ");
         int x = sc.nextInt();
 
         for(int i = 0; i<x; i++){
@@ -85,7 +99,7 @@ public class UczelniaHandler {
             System.out.print("Ilosc godzin: ");
             int godz = sc.nextInt();
             System.out.print("Ocena: ");
-            int ocena = sc.nextInt();
+            double ocena = sc.nextDouble();
             student.addPrzedmiot(new Przedmiot(nazwaPrzedmiotu, ects, godz, ocena));
         }
     }
@@ -95,6 +109,33 @@ public class UczelniaHandler {
                 ((Student)czlowiek).addPrzedmiot(przedmioty[i]);
             }
         }
+    }
+    public static ArrayList<Student> initializeStudentArrayList(ArrayList<Osoba> ludzie){
+        ArrayList<Student> studenci = new ArrayList<Student>();
+        for(Osoba osoba : ludzie) {
+            if(osoba instanceof Student) {
+                studenci.add((Student)osoba);
+            }
+        }
+        return studenci;
+    }
+    public static void setOcenyForStudent(ArrayList<Student> studenci) {
+        System.out.println("Ktoremu studentowi chcesz zmienic oceny?");
+        printInfoforStudents(studenci);
+        System.out.print("Wybierz indeks studenta ( [x] ): ");
+        Scanner sc = new Scanner(System.in);
+        int choice1 = sc.nextInt();
+        double ocena;
+        System.out.println("Zmieniasz oceny studentowi: " + studenci.get(choice1).getImie() + " " + studenci.get(choice1).getNazwisko());
+        if(!(choice1 >= studenci.size()) && !(choice1 < 0)) {
+            for(Przedmiot przedmiot : studenci.get(choice1).getPrzedmioty()) {
+                System.out.println("Ocena dla przedmiotu: " + przedmiot.getNazwa() + ": ");
+                ocena = sc.nextDouble();
+                przedmiot.setOcena(ocena);
+            }
+            System.out.println("Oceny zostaly zmienione");
+        }
+
     }
 
     public static void ListOfActions(ArrayList<Osoba> ludzie) throws InterruptedException {
@@ -108,7 +149,7 @@ public class UczelniaHandler {
             System.out.println();
             System.out.println("What do you want to do?");
             System.out.println("1. Add a person \n2. Save all of the people\n3. Print all of the people" +
-                                "\n4. Save Students to txt file\n5. Read Students from txt File\n6. Quit");
+                                "\n4. Save Students to txt file\n5. Read Students from txt File\n6. Set oceny for one student\n7. Quit");
 
             Scanner sc = new Scanner(System.in);
             System.out.print("choice: ");
@@ -175,7 +216,7 @@ public class UczelniaHandler {
                     break;
                 }
                 case 3: {
-                    printInfo(readFromFile ());
+                    printInfo(readFromFile());
                     break;
                 }
                 case 4: {
@@ -193,6 +234,10 @@ public class UczelniaHandler {
                     break;
                 }
                 case 6: {
+                    setOcenyForStudent(initializeStudentArrayList(ludzie));
+                    break;
+                }
+                case 7: {
                     t = false;
                     break;
                 }
